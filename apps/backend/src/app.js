@@ -5,6 +5,13 @@ import http from "http";
 import cfg from "../src/config/config.js";
 import { Artist, Song, User } from "./models/index.js";
 import { connection } from "./config/db.js";
+import { useApiRouter } from "./router/index.js";
+import {
+	boomErrorHandler,
+	errorHandler,
+	logErrorHandler,
+	ormErrorHandler,
+} from "./middlewares/errorHandler.js";
 const app = express();
 app.use(express.json())
 	.use(express.urlencoded({ extended: true }))
@@ -15,13 +22,18 @@ app.get("/", (req, res) => {
 	res.json({ status: "ok" });
 });
 
+useApiRouter(app);
+
+app.use(logErrorHandler)
+	.use(boomErrorHandler)
+	.use(ormErrorHandler)
+	.use(errorHandler);
+
 const server = http.createServer(app);
 server.listen(cfg.port);
 server.on("listening", () => {
 	console.log("Server running on http://localhost:" + cfg.port);
 	connection();
-	{
-	}
 });
 
 server.on("error", (error) => {
