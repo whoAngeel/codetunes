@@ -1,7 +1,9 @@
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
-
+import http from 'http'
+import cfg from "../src/config/config.js";
+import { connection } from "./config/db.js";
 const app = express();
 
 app.use(express.json())
@@ -9,8 +11,20 @@ app.use(express.json())
 	.use(morgan("dev"))
 	.use(cors());
 
+
+
 app.get("/", (req, res) => {
 	res.json({ status: "ok" });
 });
 
-app.listen(4000, () => console.log("Server running on port https://localhost:4000"));
+
+const server = http.createServer(app)
+server.listen(cfg.port)
+server.on('listening', ()=>{
+    console.log('Server running on http://localhost:'+cfg.port);
+    connection()
+})
+
+server.on('error', (error)=>{
+    console.log(error);
+})
