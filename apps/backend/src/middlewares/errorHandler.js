@@ -1,6 +1,6 @@
 import { ValidationError } from "sequelize";
 
-export const logErrorHandler = (err, req, res, next) => {
+export const logErrors = (err, req, res, next) => {
 	console.log("ERROR_LOG: ", err.message);
 };
 
@@ -13,12 +13,12 @@ export function errorHandler(err, req, res, next) {
 }
 
 export function boomErrorHandler(err, req, res, next) {
-	if (err.isBoom) {
-		const { output } = err;
-		res.status(output.statusCode).json(output.payload);
-	} else {
-		next(err);
-	}
+    if (err.isBoom) {
+        const { output } = err
+        res.status(output.statusCode).json(output.payload)
+    } else {
+        next(err)
+    }
 }
 
 export function ormErrorHandler(err, req, res, next) {

@@ -9,7 +9,7 @@ import { useApiRouter } from "./router/index.js";
 import {
 	boomErrorHandler,
 	errorHandler,
-	logErrorHandler,
+	logErrors,
 	ormErrorHandler,
 } from "./middlewares/errorHandler.js";
 const app = express();
@@ -24,10 +24,11 @@ app.get("/", (req, res) => {
 
 useApiRouter(app);
 
-app.use(logErrorHandler)
-	.use(boomErrorHandler)
-	.use(ormErrorHandler)
-	.use(errorHandler);
+app.use(logErrors)
+app.use(boomErrorHandler)
+app.use(ormErrorHandler)
+app.use(errorHandler)
+
 
 const server = http.createServer(app);
 server.listen(cfg.port);

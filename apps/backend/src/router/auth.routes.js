@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { register } from "../services/auth.services.js";
+import { login, register } from "../services/auth.services.js";
 
 const router = Router()
 
@@ -13,6 +13,14 @@ router.post('/register/local',async (req,res,next)=>{
     }
 })
 
-// router.post()
+router.post('/login/local', async (req,res,next)=>{
+    try {
+        const {email, password} = req.body
+        const rta = await login(email, password)
+        res.status(200).json(rta)
+    } catch (error) {
+        next(error)
+    }
+})
 
 export default router
