@@ -1,4 +1,5 @@
 import { sequelize } from "../config/db.js";
+import { DataTypes} from '@sequelize/core'
 import uniqid from "uniqid";
 
 import {
@@ -51,10 +52,7 @@ const Song = sequelize.define('Song', {
         allowNull: false,
         columnName: 'cloudinary_secure_url'
     },
-    artistId: { // TODO: add foreign key
-        type: DataTypes.STRING(18),
-        allowNull: false,   
-    } 
+    
 }, {timestamps: true, tableName: 'songs'})
 
 const Artist = sequelize.define('Artist', {
@@ -66,7 +64,7 @@ const Artist = sequelize.define('Artist', {
     name: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true
+        unique: true,
     },
     bio: {
         type: DataTypes.TEXT,
@@ -119,7 +117,7 @@ Artist.hasMany(Song, {foreignKey:'artistId', as: 'songs'})
 Song.belongsTo(Artist, {foreignKey: "artistId"})
 
 User.hasMany(Artist, {foreignKey: 'userId' })
-Artist.belongsTo(User, {foreignKey: 'user_id'})
+Artist.belongsTo(User, {foreignKey: 'userId'})
 
 sequelize.sync()
 
