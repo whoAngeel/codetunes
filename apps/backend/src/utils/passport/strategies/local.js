@@ -2,7 +2,7 @@ import { badData, unauthorized } from "@hapi/boom";
 import { Strategy } from "passport-local";
 import { findByEmail } from "../../../services/auth.services.js";
 import { compare } from "bcrypt";
-export default new Strategy(
+const LocalStrategy =new Strategy(
 	{
 		usernameField: "email",
 		passwordField: "password",
@@ -21,3 +21,5 @@ export default new Strategy(
 		}
 	}
 );
+
+export default LocalStrategy

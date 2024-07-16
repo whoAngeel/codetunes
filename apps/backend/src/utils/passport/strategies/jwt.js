@@ -1,7 +1,7 @@
 import { ExtractJwt, Strategy } from "passport-jwt";
 import config from "../../../config/config.js";
 
-export default new Strategy(
+const JWTStrategy = new Strategy(
 	{
 		jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
 		secretOrKey: config.secret,
@@ -10,3 +10,5 @@ export default new Strategy(
 		return done(null, payload);
 	}
 );
+
+export default JWTStrategy;

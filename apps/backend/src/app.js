@@ -12,6 +12,7 @@ import {
 	logErrors,
 	ormErrorHandler,
 } from "./middlewares/errorHandler.js";
+
 const app = express();
 
 app.use(express.json());

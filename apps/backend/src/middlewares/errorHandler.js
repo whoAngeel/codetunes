@@ -7,7 +7,7 @@ export const logErrors = (err, req, res, next) => {
 
 
 export function errorHandler(err, req, res, next) {
-    debug(err.message)
+    console.log(err.message)
     res.status(500).json({
         message: err.message,
         stack: err.stack
