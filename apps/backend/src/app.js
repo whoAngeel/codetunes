@@ -19,19 +19,20 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 app.use(cors());
 
+import "./utils/passport/index.js"; // strategies de passport
+
 app.get("/", (req, res) => {
 	res.json({ status: "ok" });
 });
 useApiRouter(app);
 
-app.use(logErrors)
-app.use(boomErrorHandler)
-app.use(ormErrorHandler)
-app.use(errorHandler)
+app.use(logErrors);
+app.use(boomErrorHandler);
+app.use(ormErrorHandler);
+app.use(errorHandler);
 
-connection() 
+connection();
 
-
-app.listen(cfg.port,()=>{
-    console.log("Server running on http://localhost:" + cfg.port);
-})
+app.listen(cfg.port, () => {
+	console.log("Server running on http://localhost:" + cfg.port);
+});

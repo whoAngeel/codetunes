@@ -27,6 +27,6 @@ export const register = async (userData) => {
 	return newUser;
 };
 
-const findByEmail = async (email) => {
+export const findByEmail = async (email) => {
 	return await User.findOne({ where: { email } });
 };
