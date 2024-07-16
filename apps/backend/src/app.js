@@ -13,15 +13,15 @@ import {
 	ormErrorHandler,
 } from "./middlewares/errorHandler.js";
 const app = express();
-app.use(express.json())
-	.use(express.urlencoded({ extended: true }))
-	.use(morgan("dev"))
-	.use(cors());
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(morgan("dev"));
+app.use(cors());
 
 app.get("/", (req, res) => {
 	res.json({ status: "ok" });
 });
-
 useApiRouter(app);
 
 app.use(logErrors)
@@ -29,14 +29,9 @@ app.use(boomErrorHandler)
 app.use(ormErrorHandler)
 app.use(errorHandler)
 
+connection() 
 
-const server = http.createServer(app);
-server.listen(cfg.port);
-server.on("listening", () => {
-	console.log("Server running on http://localhost:" + cfg.port);
-	connection();
-});
 
-server.on("error", (error) => {
-	console.log(error);
-});
+app.listen(cfg.port,()=>{
+    console.log("Server running on http://localhost:" + cfg.port);
+})

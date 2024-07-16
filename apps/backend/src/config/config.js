@@ -6,6 +6,7 @@ const config = {
 	dbname: process.env.DB_NAME || "",
 	dbuser: process.env.DB_USER || "",
 	dbpass: process.env.DB_PASS || "",
+	secret: process.env.JWT_KEY,
 };
 
 export default config;

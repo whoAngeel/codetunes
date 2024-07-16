@@ -1,11 +1,17 @@
-import { notAcceptable, notFound } from "@hapi/boom";
+import { badData, boomify, notAcceptable, notFound } from "@hapi/boom";
 import { Song, User } from "../models/index.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import config from "../config/config.js";
 export const login = async (email, password) => {
 	const user = await findByEmail(email);
 	if (!user) throw notFound("User not found");
 	const isMatch = await bcrypt.compare(password, user.password);
-	if (!isMatch) throw notAcceptable("Wrong password");
+	if (!isMatch) throw badData("Wrong password");
+	
+	const token = jwt.sign({ id: user.id }, config.secret);
+	delete user.dataValues.password;
+	user.dataValues.token = token;
 	return user;
 };
 
