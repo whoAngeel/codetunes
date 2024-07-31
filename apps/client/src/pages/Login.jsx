@@ -19,6 +19,7 @@ function Login() {
   const login=(data)=>{
     axios.post('/api/auth/login/local', data).then(res=>{
       console.log(res.data);
+	  sessionStorage.setItem('token', res.data.token)
       navigate('/')
     }).catch(err=>{
       console.log(err);
