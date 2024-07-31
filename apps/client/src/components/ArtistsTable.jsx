@@ -43,20 +43,38 @@ function ArtistsTable() {
 						{/* head */}
 						<thead>
 							<tr>
-								<th></th>
 								<th>Name</th>
-								<th>Job</th>
-								<th>Favorite Color</th>
+								<th>Bio</th>
+								<th>Actions</th>
 							</tr>
 						</thead>
 						<tbody>
 							{artists.map((artist) => {
 								return (
 									<tr className="hover" key={artist.id}>
-										<th>{artist.id}</th>
-										<td>Hart Hagerty</td>
-										<td>Desktop Support Technician</td>
-										<td>Purple</td>
+										<td>
+											<div className="flex items-center gap-3">
+												<div className="avatar">
+													<div className="mask mask-squircle h-12 w-12">
+														<img
+															src={artist.coverImg}
+															alt="Avatar Tailwind CSS Component"
+														/>
+													</div>
+												</div>
+												<div>
+													<div className="font-bold">
+														{artist.name}
+													</div>
+													<div className="text-sm opacity-50">
+														{artist.genre}
+													</div>
+												</div>
+											</div>
+										</td>
+										<td>
+											{artist.bio}
+										</td>
 									</tr>
 								);
 							})}

@@ -77,7 +77,7 @@ function CreateArtistModal() {
 						>
 							{isSubmitting && (
 								<>
-									<span class="loading loading-spinner"></span>
+									<span className="loading loading-spinner"></span>
 									Submitting...
 								</>
 							)}

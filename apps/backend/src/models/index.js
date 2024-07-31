@@ -65,6 +65,10 @@ const Artist = sequelize.define('Artist', {
         allowNull: false,
         unique: true,
     },
+    gender: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
     bio: {
         type: DataTypes.TEXT,
         allowNull: false,
