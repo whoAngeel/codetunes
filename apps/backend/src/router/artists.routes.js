@@ -19,7 +19,7 @@ const router = Router();
 
 router.use(fileUpload({
 	useTempFiles: true,
-	tempFileDir: `${__dirname}/tmp`,
+	tempFileDir: '../../tmp',
 }))
 
 router.get("/", async (req, res, next) => {
@@ -36,7 +36,7 @@ router.get(
 	passport.authenticate("jwt", { session: false }),
 	async (req, res, next) => {
 		try {
-			const rta = ownArtists(req.user.id);
+			const rta = await ownArtists(req.user.id);
 			res.json(rta);
 		} catch (error) {
 			next(error);
@@ -83,8 +83,9 @@ router.post(
 			const result = await uploadImage(req.files.image)
 			const userId = req.user.id;
 			const artistData = { ...req.body, userId,  
-				cloudinaryPublicId: result.public_id,
-				cloudinarySecureUrl: result.secure_url
+				cloudinaryPublicId: result.public_id,	
+				cloudinarySecureUrl: result.secure_url,
+				coverImg: result.secure_url
 			};
 			const rta = await createArtist(artistData);
 			res.status(201).json(rta);

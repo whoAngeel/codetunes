@@ -39,7 +39,6 @@ const Song = sequelize.define('Song', {
     },
     coverImg: {
         type: DataTypes.STRING,
-        allowNull: false,
         columnName: 'cover_img'
     },
     cloudinaryPublicId: {
@@ -73,17 +72,14 @@ const Artist = sequelize.define('Artist', {
     },
     coverImg: {
         type: DataTypes.STRING,
-        allowNull: false,
         columnName: 'cover_img'
     },
     cloudinaryPublicId: {
         type: DataTypes.STRING,
-        allowNull: false,
         columnName: 'cloudinary_public_id'
     },
     cloudinarySecureUrl: {
         type: DataTypes.STRING,
-        allowNull: false,
         columnName: 'cloudinary_secure_url'
     },
 }, {
@@ -105,11 +101,7 @@ const User = sequelize.define('User', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    username: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true
-    },
+    
     email: {
         type: DataTypes.STRING,
         allowNull: false,
