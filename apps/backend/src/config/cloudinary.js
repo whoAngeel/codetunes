@@ -16,6 +16,13 @@ export const uploadFile = (file) => {
 		resource_type: "auto",
 	});
 };
+export const uploadImage = (file)=>{
+	return cloudinary.uploader.upload(file.tempFilePath,{
+		folder: 'images',
+		public_id: uniqid('image'),
+		resource_type: 'image',
+	})
+}
 
 export const deleteFile = (public_id) => {
 	return cloudinary.uploader.destroy(public_id, {
