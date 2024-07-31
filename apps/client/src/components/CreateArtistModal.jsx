@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import Modal from "./Modal";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 function CreateArtistModal() {
 	const { register, handleSubmit, formState } = useForm();
+	const [loading, setLoading] = useState(false)
 	const { isSubmitting } = formState;
 	const createArtist = async (data) => {
 		const formData = new FormData();
@@ -12,6 +14,7 @@ function CreateArtistModal() {
 		formData.append("gender", data.gender);
 		formData.append("bio", data.bio);
 		formData.append("image", data.coverImg[0]);
+		setLoading(true)
 		axios
 			.post("/api/artists", formData, {
 				headers: {
@@ -21,10 +24,14 @@ function CreateArtistModal() {
 			})
 			.then((res) => {
 				console.log(res.data);
+				toast.success("Artist created successfully");
 			})
 			.catch((err) => {
 				console.log(err);
-			});
+				toast.error(err.response.data.message);
+			}).finally(()=>{
+				setLoading(false)
+			})
 	};
 
 	return (
@@ -72,16 +79,18 @@ function CreateArtistModal() {
 							/>
 						</div>
 						<button
-							disabled={isSubmitting}
+							type="submit"
+							disabled={loading}
 							className="btn btn-primary btn-sm"
 						>
-							{isSubmitting && (
+							{loading ? (
 								<>
 									<span className="loading loading-spinner"></span>
-									Submitting...
+									Submitting
 								</>
+							) : (
+								"Create"
 							)}
-							Create
 						</button>
 					</div>
 				</form>
