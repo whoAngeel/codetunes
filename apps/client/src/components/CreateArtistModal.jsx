@@ -38,7 +38,7 @@ function CreateArtistModal() {
 							<span className="w-1/4">Avatar</span>
 							<input
 								type="file"
-								class="file-input file-input-bordered file-input-sm file-input-success w-3/4 max-w-xs "
+								className="file-input file-input-bordered file-input-sm file-input-success w-3/4 max-w-xs "
 							/>
 						</div>
                         <button className="btn btn-primary btn-sm">Create</button>

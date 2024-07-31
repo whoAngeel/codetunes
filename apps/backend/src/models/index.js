@@ -75,7 +75,17 @@ const Artist = sequelize.define('Artist', {
         type: DataTypes.STRING,
         allowNull: false,
         columnName: 'cover_img'
-    }
+    },
+    cloudinaryPublicId: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        columnName: 'cloudinary_public_id'
+    },
+    cloudinarySecureUrl: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        columnName: 'cloudinary_secure_url'
+    },
 }, {
     timestamps: true,
     tableName: 'artists'

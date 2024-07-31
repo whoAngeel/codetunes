@@ -31,7 +31,6 @@ function ArtistsTable() {
 		return <div>Loading...</div>;
 	}
 
-   
 	if (error) {
 		return <div>Error {error}</div>;
 	}
@@ -39,34 +38,36 @@ function ArtistsTable() {
 	return (
 		<div className="w-full mx-auto">
 			{artists.length > 0 ? (
-               <div className="overflow-x-auto">
- <table className="table">
-				{/* head */}
-				<thead>
-					<tr>
-						<th></th>
-						<th>Name</th>
-						<th>Job</th>
-						<th>Favorite Color</th>
-					</tr>
-				</thead>
-				<tbody>
-					{artists.map((artist) => {
-						return (
-							<tr className="hover" key={artist.id}>
-								<th>{artist.id}</th>
-								<td>Hart Hagerty</td>
-								<td>Desktop Support Technician</td>
-								<td>Purple</td>
+				<div className="overflow-x-auto">
+					<table className="table">
+						{/* head */}
+						<thead>
+							<tr>
+								<th></th>
+								<th>Name</th>
+								<th>Job</th>
+								<th>Favorite Color</th>
 							</tr>
-						);
-					})}
-				</tbody>
-			</table>
-               </div>
-            ) : (
-                <div className="text-center text-3xl w-full text-gray-600">no artists yet</div>
-            )}
+						</thead>
+						<tbody>
+							{artists.map((artist) => {
+								return (
+									<tr className="hover" key={artist.id}>
+										<th>{artist.id}</th>
+										<td>Hart Hagerty</td>
+										<td>Desktop Support Technician</td>
+										<td>Purple</td>
+									</tr>
+								);
+							})}
+						</tbody>
+					</table>
+				</div>
+			) : (
+				<div className="text-center text-3xl w-full text-gray-600">
+					no artists yet
+				</div>
+			)}
 		</div>
 	);
 }
